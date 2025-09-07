@@ -1,0 +1,58 @@
+# Robots.txt for SilksongMap.store
+# Hollow Knight: Silksong Guide and Boss Strategies
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow specific file types
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.ico
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://silksongmap.store/sitemap.xml
+
+# Additional sitemaps (if you create more in the future)
+# Sitemap: https://silksongmap.store/sitemap-bosses.xml
+# Sitemap: https://silksongmap.store/sitemap-guides.xml
+# Sitemap: https://silksongmap.store/sitemap-maps.xml
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
