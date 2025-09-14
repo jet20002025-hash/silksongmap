@@ -4,8 +4,24 @@
     <url>
         <loc>https://silksongmap.store/</loc>
         <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
+    </url>
+    
+    <!-- PWA Manifest -->
+    <url>
+        <loc>https://silksongmap.store/manifest.json</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Service Worker -->
+    <url>
+        <loc>https://silksongmap.store/sw.js</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
     </url>
     
     <!-- Boss Strategies Section -->
@@ -38,79 +54,5 @@
         <lastmod>2024-12-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
-    </url>
-    
-    <!-- Individual Boss Pages (Future) -->
-    <url>
-        <loc>https://silksongmap.store/bosses/moss-mother</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/bosses/lace</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/bosses/steel-assassin-sharpe</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <!-- Guide Pages (Future) -->
-    <url>
-        <loc>https://silksongmap.store/guides/beginner-guide</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/guides/money-saving-tips</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/guides/speedrun-techniques</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <!-- Map Pages (Future) -->
-    <url>
-        <loc>https://silksongmap.store/maps/world-map</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/maps/collectibles</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <!-- Community Pages (Future) -->
-    <url>
-        <loc>https://silksongmap.store/community</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    
-    <url>
-        <loc>https://silksongmap.store/community/strategies</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
     </url>
 </urlset>

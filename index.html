@@ -45,11 +45,49 @@
                         'apple-green': '#34C759',
                         'apple-orange': '#FF9500',
                         'apple-red': '#FF3B30',
+                        'dark-bg': '#0D1117',
+                        'dark-surface': '#161B22',
+                        'dark-border': '#30363D',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-gentle': 'bounceGentle 0.6s ease-in-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#007AFF">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7208260866318884"
+         crossorigin="anonymous"></script>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -67,103 +105,142 @@
     }
     </script>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="bg-white dark:bg-dark-bg text-gray-900 dark:text-white font-sans transition-colors duration-300">
     <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header class="bg-white dark:bg-dark-surface shadow-sm border-b border-gray-200 dark:border-dark-border sticky top-0 z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-apple-dark-gray">
+                    <h1 class="text-2xl font-bold text-apple-dark-gray dark:text-white">
                         <a href="/" class="hover:text-apple-blue transition-colors">SilksongMap</a>
                     </h1>
                 </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" placeholder="搜索Boss、技巧、指南..." 
+                               class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-dark-border rounded-lg bg-white dark:bg-dark-surface text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#bosses" class="text-gray-700 hover:text-apple-blue transition-colors">Boss Guide</a>
-                    <a href="#tips" class="text-gray-700 hover:text-apple-blue transition-colors">Money Tips</a>
-                    <a href="#beginner" class="text-gray-700 hover:text-apple-blue transition-colors">Beginner Guide</a>
-                    <a href="#maps" class="text-gray-700 hover:text-apple-blue transition-colors">Interactive Maps</a>
+                    <a href="#bosses" class="text-gray-700 dark:text-gray-300 hover:text-apple-blue transition-colors">Boss Guide</a>
+                    <a href="#tips" class="text-gray-700 dark:text-gray-300 hover:text-apple-blue transition-colors">Money Tips</a>
+                    <a href="#beginner" class="text-gray-700 dark:text-gray-300 hover:text-apple-blue transition-colors">Beginner Guide</a>
+                    <a href="#maps" class="text-gray-700 dark:text-gray-300 hover:text-apple-blue transition-colors">Interactive Maps</a>
                 </nav>
+                
+                <!-- Theme Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
                 <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-apple-blue">
+                        <button id="mobileMenuToggle" class="text-gray-700 dark:text-gray-300 hover:text-apple-blue">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search -->
+        <div class="md:hidden border-t border-gray-200 dark:border-dark-border px-4 py-3">
+            <div class="relative">
+                <input type="text" id="mobileSearchInput" placeholder="搜索Boss、技巧、指南..." 
+                       class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-dark-border rounded-lg bg-white dark:bg-dark-surface text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-apple-light-gray to-white py-20">
+    <section class="bg-gradient-to-br from-apple-light-gray dark:from-dark-surface to-white dark:to-dark-bg py-20 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-apple-dark-gray mb-6">
+            <h1 class="text-4xl md:text-6xl font-bold text-apple-dark-gray dark:text-white mb-6 animate-fade-in">
                 Master Hollow Knight: Silksong
             </h1>
-            <p class="text-xl text-apple-gray mb-8 max-w-3xl mx-auto">
+            <p class="text-xl text-apple-gray dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up">
                 Complete boss strategies, money-saving tips, and beginner guides to help you conquer Pharloom efficiently. 
                 Save time, save money, and master every encounter with our expert strategies.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-apple-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                    Boss Strategies
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                <button onclick="scrollToSection('bosses')" class="bg-apple-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                    <i class="fas fa-sword mr-2"></i>Boss Strategies
                 </button>
-                <button class="border border-apple-blue text-apple-blue px-8 py-3 rounded-lg font-semibold hover:bg-apple-blue hover:text-white transition-colors">
-                    Money Tips
+                <button onclick="scrollToSection('tips')" class="border border-apple-blue text-apple-blue dark:text-apple-blue px-8 py-3 rounded-lg font-semibold hover:bg-apple-blue hover:text-white transition-all duration-200 transform hover:scale-105">
+                    <i class="fas fa-coins mr-2"></i>Money Tips
                 </button>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in">
+                <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
+                    <div class="text-3xl font-bold text-apple-blue mb-2">43</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Total Bosses</div>
+                </div>
+                <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
+                    <div class="text-3xl font-bold text-apple-green mb-2">7</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Main Story</div>
+                </div>
+                <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
+                    <div class="text-3xl font-bold text-apple-orange mb-2">16</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Mini Bosses</div>
+                </div>
+                <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
+                    <div class="text-3xl font-bold text-apple-red mb-2">20</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Optional</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
-        <!-- Quick Stats Section -->
-        <section class="mb-16">
-            <div class="bg-gradient-to-r from-apple-blue to-blue-600 rounded-xl p-8 text-white text-center">
-                <h2 class="text-3xl font-bold mb-6">Silksong Complete Guide</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div>
-                        <div class="text-3xl font-bold">43</div>
-                        <div class="text-sm opacity-90">Total Bosses</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold">7</div>
-                        <div class="text-sm opacity-90">Main Story</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold">16</div>
-                        <div class="text-sm opacity-90">Mini Bosses</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold">20</div>
-                        <div class="text-sm opacity-90">Optional</div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Boss Strategies Section -->
         <section id="bosses" class="mb-16">
-            <h2 class="text-3xl font-bold text-apple-dark-gray mb-8 text-center">Complete Boss Strategies</h2>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-apple-dark-gray dark:text-white mb-4 md:mb-0">Complete Boss Strategies</h2>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active" data-filter="all">All Bosses</button>
+                    <button class="filter-btn" data-filter="main">Main Story</button>
+                    <button class="filter-btn" data-filter="optional">Optional</button>
+                    <button class="filter-btn" data-filter="mini">Mini Bosses</button>
+                </div>
+            </div>
+            
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Top Bosses -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-2xl font-semibold text-apple-dark-gray mb-4">Essential Boss Fights</h3>
+                <div class="bg-white dark:bg-dark-surface rounded-xl shadow-sm border border-gray-200 dark:border-dark-border p-6 transition-all duration-200 hover:shadow-md">
+                    <h3 class="text-2xl font-semibold text-apple-dark-gray dark:text-white mb-4">Essential Boss Fights</h3>
                     
                     <div class="space-y-4">
-                        <div class="border-l-4 border-apple-blue pl-4">
-                            <h4 class="font-semibold text-lg">Moss Mother - First Major Boss</h4>
-                            <p class="text-gray-600 text-sm mb-2">📍 Moss Grotto - Eastern Chamber | Difficulty: ★★☆☆☆</p>
-                            <div class="flex gap-4 text-sm text-gray-500 mb-2">
-                                <span>280 HP</span>
-                                <span>2 Damage</span>
-                                <span>3:30 Avg Time</span>
+                        <div class="boss-card border-l-4 border-apple-blue pl-4 p-4 rounded-lg bg-gray-50 dark:bg-dark-border transition-all duration-200 hover:shadow-md" data-category="main">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-lg text-apple-dark-gray dark:text-white">Moss Mother - First Major Boss</h4>
+                                <button class="favorite-btn text-gray-400 hover:text-apple-red transition-colors" data-boss="moss-mother">
+                                    <i class="far fa-heart"></i>
+                                </button>
                             </div>
-                            <p class="text-gray-600 mb-3">The first major test in Silksong. Learn poison patterns and platform mobility.</p>
-                            <div class="bg-apple-light-gray p-3 rounded">
-                                <p class="text-sm font-medium text-apple-dark-gray mb-1">💡 Pro Tips:</p>
-                                <ul class="text-sm text-gray-600 space-y-1">
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">📍 Moss Grotto - Eastern Chamber | Difficulty: ★★☆☆☆</p>
+                            <div class="flex gap-4 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span><i class="fas fa-heart mr-1"></i>280 HP</span>
+                                <span><i class="fas fa-sword mr-1"></i>2 Damage</span>
+                                <span><i class="fas fa-clock mr-1"></i>3:30 Avg Time</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-3">The first major test in Silksong. Learn poison patterns and platform mobility.</p>
+                            <div class="bg-apple-light-gray dark:bg-dark-surface p-3 rounded">
+                                <p class="text-sm font-medium text-apple-dark-gray dark:text-white mb-1">💡 Pro Tips:</p>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
                                     <li>• Stay mobile - poison floor deals damage over time</li>
                                     <li>• Watch for 1.5-second inhale before poison spray</li>
                                     <li>• Kill moss creepers for silk refills</li>
@@ -171,18 +248,23 @@
                             </div>
                         </div>
 
-                        <div class="border-l-4 border-apple-orange pl-4">
-                            <h4 class="font-semibold text-lg">Lace - The Persistent Rival</h4>
-                            <p class="text-gray-600 text-sm mb-2">📍 Multiple Encounters | Difficulty: ★★★★☆</p>
-                            <div class="flex gap-4 text-sm text-gray-500 mb-2">
-                                <span>450+ HP</span>
-                                <span>3 Damage</span>
-                                <span>5:45 Avg Time</span>
+                        <div class="boss-card border-l-4 border-apple-orange pl-4 p-4 rounded-lg bg-gray-50 dark:bg-dark-border transition-all duration-200 hover:shadow-md" data-category="main">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-lg text-apple-dark-gray dark:text-white">Lace - The Persistent Rival</h4>
+                                <button class="favorite-btn text-gray-400 hover:text-apple-red transition-colors" data-boss="lace">
+                                    <i class="far fa-heart"></i>
+                                </button>
                             </div>
-                            <p class="text-gray-600 mb-3">Adaptive AI that learns from your strategies. Changes moveset based on your playstyle.</p>
-                            <div class="bg-apple-light-gray p-3 rounded">
-                                <p class="text-sm font-medium text-apple-dark-gray mb-1">💡 Pro Tips:</p>
-                                <ul class="text-sm text-gray-600 space-y-1">
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">📍 Multiple Encounters | Difficulty: ★★★★☆</p>
+                            <div class="flex gap-4 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span><i class="fas fa-heart mr-1"></i>450+ HP</span>
+                                <span><i class="fas fa-sword mr-1"></i>3 Damage</span>
+                                <span><i class="fas fa-clock mr-1"></i>5:45 Avg Time</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-3">Adaptive AI that learns from your strategies. Changes moveset based on your playstyle.</p>
+                            <div class="bg-apple-light-gray dark:bg-dark-surface p-3 rounded">
+                                <p class="text-sm font-medium text-apple-dark-gray dark:text-white mb-1">💡 Pro Tips:</p>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
                                     <li>• Vary your approach - she adapts to repeated strategies</li>
                                     <li>• Golden flash indicates parryable attacks</li>
                                     <li>• Stay mid-range to limit her options</li>
@@ -190,18 +272,23 @@
                             </div>
                         </div>
 
-                        <div class="border-l-4 border-apple-red pl-4">
-                            <h4 class="font-semibold text-lg">Steel Assassin Sharpe</h4>
-                            <p class="text-gray-600 text-sm mb-2">📍 Hunter's March - Colosseum | Difficulty: ★★★★★</p>
-                            <div class="flex gap-4 text-sm text-gray-500 mb-2">
-                                <span>600 HP</span>
-                                <span>4 Damage</span>
-                                <span>8:20 Avg Time</span>
+                        <div class="boss-card border-l-4 border-apple-red pl-4 p-4 rounded-lg bg-gray-50 dark:bg-dark-border transition-all duration-200 hover:shadow-md" data-category="optional">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-lg text-apple-dark-gray dark:text-white">Steel Assassin Sharpe</h4>
+                                <button class="favorite-btn text-gray-400 hover:text-apple-red transition-colors" data-boss="steel-assassin-sharpe">
+                                    <i class="far fa-heart"></i>
+                                </button>
                             </div>
-                            <p class="text-gray-600 mb-3">The ultimate skill test. Lightning-fast attacks with minimal telegraphs.</p>
-                            <div class="bg-apple-light-gray p-3 rounded">
-                                <p class="text-sm font-medium text-apple-dark-gray mb-1">💡 Pro Tips:</p>
-                                <ul class="text-sm text-gray-600 space-y-1">
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">📍 Hunter's March - Colosseum | Difficulty: ★★★★★</p>
+                            <div class="flex gap-4 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span><i class="fas fa-heart mr-1"></i>600 HP</span>
+                                <span><i class="fas fa-sword mr-1"></i>4 Damage</span>
+                                <span><i class="fas fa-clock mr-1"></i>8:20 Avg Time</span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-3">The ultimate skill test. Lightning-fast attacks with minimal telegraphs.</p>
+                            <div class="bg-apple-light-gray dark:bg-dark-surface p-3 rounded">
+                                <p class="text-sm font-medium text-apple-dark-gray dark:text-white mb-1">💡 Pro Tips:</p>
+                                <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
                                     <li>• Master parrying - essential for survival</li>
                                     <li>• Learn audio cues for attack prediction</li>
                                     <li>• Save silk for emergency healing</li>
@@ -212,34 +299,34 @@
                 </div>
 
                 <!-- Boss Categories -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-2xl font-semibold text-apple-dark-gray mb-4">Boss Categories & Rewards</h3>
+                <div class="bg-white dark:bg-dark-surface rounded-xl shadow-sm border border-gray-200 dark:border-dark-border p-6 transition-all duration-200 hover:shadow-md">
+                    <h3 class="text-2xl font-semibold text-apple-dark-gray dark:text-white mb-4">Boss Categories & Rewards</h3>
                     
                     <div class="space-y-4">
-                        <div class="bg-gradient-to-r from-apple-green to-green-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Main Story Bosses (7)</h4>
-                            <p class="text-sm text-gray-600 mb-2">Essential for story progression</p>
-                            <div class="text-sm text-gray-700">
+                        <div class="bg-gradient-to-r from-apple-green to-green-100 dark:from-green-900 dark:to-green-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Main Story Bosses (7)</h4>
+                            <p class="text-sm text-green-100 dark:text-green-200 mb-2">Essential for story progression</p>
+                            <div class="text-sm text-green-50 dark:text-green-100">
                                 <p>• Moss Mother → Verdant Shell Tool</p>
                                 <p>• Lace → Gilded Crest</p>
                                 <p>• Judge → Justice Scale</p>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-orange to-orange-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Optional Bosses (20)</h4>
-                            <p class="text-sm text-gray-600 mb-2">High-value rewards, skip for speedruns</p>
-                            <div class="text-sm text-gray-700">
+                        <div class="bg-gradient-to-r from-apple-orange to-orange-100 dark:from-orange-900 dark:to-orange-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Optional Bosses (20)</h4>
+                            <p class="text-sm text-orange-100 dark:text-orange-200 mb-2">High-value rewards, skip for speedruns</p>
+                            <div class="text-sm text-orange-50 dark:text-orange-100">
                                 <p>• Fourth Chorus → Harmony Tool</p>
                                 <p>• Cogwork Dancers → Temporal Gear</p>
                                 <p>• Secret Bosses → Unique Abilities</p>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Mini Bosses (16)</h4>
-                            <p class="text-sm text-gray-600 mb-2">Quick encounters, good for practice</p>
-                            <div class="text-sm text-gray-700">
+                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 dark:from-blue-900 dark:to-blue-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Mini Bosses (16)</h4>
+                            <p class="text-sm text-blue-100 dark:text-blue-200 mb-2">Quick encounters, good for practice</p>
+                            <div class="text-sm text-blue-50 dark:text-blue-100">
                                 <p>• Moss Creepers → Silk Drops</p>
                                 <p>• Clockwork Guards → Gear Parts</p>
                                 <p>• Choir Beetles → Musical Notes</p>
@@ -252,25 +339,25 @@
 
         <!-- Money-Saving Tips Section -->
         <section id="tips" class="mb-16">
-            <h2 class="text-3xl font-bold text-apple-dark-gray mb-8 text-center">Money-Saving Tips & Strategies</h2>
+            <h2 class="text-3xl font-bold text-apple-dark-gray dark:text-white mb-8 text-center">Money-Saving Tips & Strategies</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Currency Management -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-2xl font-semibold text-apple-dark-gray mb-4">💰 Currency Management</h3>
+                <div class="bg-white dark:bg-dark-surface rounded-xl shadow-sm border border-gray-200 dark:border-dark-border p-6 transition-all duration-200 hover:shadow-md">
+                    <h3 class="text-2xl font-semibold text-apple-dark-gray dark:text-white mb-4">💰 Currency Management</h3>
                     
                     <div class="space-y-4">
-                        <div class="bg-gradient-to-r from-apple-green to-green-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Rosary Farming Locations</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-green to-green-100 dark:from-green-900 dark:to-green-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Rosary Farming Locations</h4>
+                            <div class="text-sm text-green-50 dark:text-green-100 space-y-1">
                                 <p>• <strong>Moss Grotto:</strong> 50-80 Rosaries per run</p>
                                 <p>• <strong>Deep Docks:</strong> 100-150 Rosaries (higher risk)</p>
                                 <p>• <strong>Hunter's March:</strong> 200+ Rosaries (endgame)</p>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Essential Purchases Priority</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 dark:from-blue-900 dark:to-blue-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Essential Purchases Priority</h4>
+                            <div class="text-sm text-blue-50 dark:text-blue-100 space-y-1">
                                 <p>1. <strong>Silk Spools</strong> - Essential for abilities</p>
                                 <p>2. <strong>Map Pins</strong> - Navigation efficiency</p>
                                 <p>3. <strong>Charms</strong> - Combat advantages</p>
@@ -278,9 +365,9 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-orange to-orange-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Skip These Purchases</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-orange to-orange-100 dark:from-orange-900 dark:to-orange-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Skip These Purchases</h4>
+                            <div class="text-sm text-orange-50 dark:text-orange-100 space-y-1">
                                 <p>• <strong>Cosmetic Items</strong> - Save for later</p>
                                 <p>• <strong>Duplicate Tools</strong> - Check inventory first</p>
                                 <p>• <strong>Expensive Charms</strong> - Find free alternatives</p>
@@ -290,13 +377,13 @@
                 </div>
 
                 <!-- Time-Saving Strategies -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-2xl font-semibold text-apple-dark-gray mb-4">⏱️ Time-Saving Strategies</h3>
+                <div class="bg-white dark:bg-dark-surface rounded-xl shadow-sm border border-gray-200 dark:border-dark-border p-6 transition-all duration-200 hover:shadow-md">
+                    <h3 class="text-2xl font-semibold text-apple-dark-gray dark:text-white mb-4">⏱️ Time-Saving Strategies</h3>
                     
                     <div class="space-y-4">
-                        <div class="bg-gradient-to-r from-apple-red to-red-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Speedrun Techniques</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-red to-red-100 dark:from-red-900 dark:to-red-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Speedrun Techniques</h4>
+                            <div class="text-sm text-red-50 dark:text-red-100 space-y-1">
                                 <p>• <strong>Needle Bounce:</strong> Skip Moss Mother entirely</p>
                                 <p>• <strong>Wall Climb:</strong> Access areas early</p>
                                 <p>• <strong>Dash Cancel:</strong> Faster movement</p>
@@ -304,18 +391,18 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-green to-green-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Efficient Route Planning</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-green to-green-100 dark:from-green-900 dark:to-green-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Efficient Route Planning</h4>
+                            <div class="text-sm text-green-50 dark:text-green-100 space-y-1">
                                 <p>• <strong>Area Order:</strong> Moss Grotto → Deep Docks → Greymoor</p>
                                 <p>• <strong>Boss Sequence:</strong> Optional bosses first for tools</p>
                                 <p>• <strong>Backtracking:</strong> Minimize with map knowledge</p>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">Resource Management</h4>
-                            <div class="text-sm text-gray-700 space-y-1">
+                        <div class="bg-gradient-to-r from-apple-blue to-blue-100 dark:from-blue-900 dark:to-blue-800 p-4 rounded-lg transition-all duration-200 hover:shadow-md">
+                            <h4 class="font-semibold text-lg mb-2 text-white">Resource Management</h4>
+                            <div class="text-sm text-blue-50 dark:text-blue-100 space-y-1">
                                 <p>• <strong>Silk Conservation:</strong> Use only when necessary</p>
                                 <p>• <strong>Health Management:</strong> Learn safe healing spots</p>
                                 <p>• <strong>Tool Efficiency:</strong> Master each tool's purpose</p>
@@ -479,17 +566,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-apple-dark-gray text-white py-12">
+    <footer class="bg-apple-dark-gray dark:bg-dark-bg text-white py-12 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">SilksongMap</h3>
-                    <p class="text-gray-400">Master Hollow Knight: Silksong with expert strategies, money-saving tips, and complete boss guides.</p>
+                    <p class="text-gray-400 dark:text-gray-500">Master Hollow Knight: Silksong with expert strategies, money-saving tips, and complete boss guides.</p>
                 </div>
                 
                 <div>
                     <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <ul class="space-y-2 text-gray-400 dark:text-gray-500">
                         <li><a href="#bosses" class="hover:text-white transition-colors">Boss Strategies</a></li>
                         <li><a href="#tips" class="hover:text-white transition-colors">Money Tips</a></li>
                         <li><a href="#beginner" class="hover:text-white transition-colors">Beginner Guide</a></li>
@@ -499,7 +586,7 @@
                 
                 <div>
                     <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <ul class="space-y-2 text-gray-400 dark:text-gray-500">
                         <li><a href="#" class="hover:text-white transition-colors">Complete Boss Guide</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Speedrun Tips</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Tool Mastery</a></li>
@@ -509,7 +596,7 @@
                 
                 <div>
                     <h4 class="font-semibold mb-4">Connect</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <ul class="space-y-2 text-gray-400 dark:text-gray-500">
                         <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Reddit</a></li>
@@ -518,33 +605,303 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-gray-700 dark:border-gray-600 mt-8 pt-8 text-center text-gray-400 dark:text-gray-500">
                 <p>&copy; 2024 SilksongMap. All rights reserved. This is a fan site and is not affiliated with Team Cherry.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- Enhanced JavaScript -->
     <script>
-        // Simple mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.querySelector('.md\\:hidden button');
-            const mobileMenu = document.createElement('div');
-            mobileMenu.className = 'md:hidden bg-white border-t border-gray-200 hidden';
-            mobileMenu.innerHTML = `
+        // Theme Management
+        class ThemeManager {
+            constructor() {
+                this.theme = localStorage.getItem('theme') || 'light';
+                this.init();
+            }
+            
+            init() {
+                this.applyTheme();
+                this.bindEvents();
+            }
+            
+            applyTheme() {
+                if (this.theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+            
+            toggle() {
+                this.theme = this.theme === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', this.theme);
+                this.applyTheme();
+            }
+            
+            bindEvents() {
+                const themeToggle = document.getElementById('themeToggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => this.toggle());
+                }
+            }
+        }
+        
+        // Search Functionality
+        class SearchManager {
+            constructor() {
+                this.searchData = this.buildSearchIndex();
+                this.init();
+            }
+            
+            buildSearchIndex() {
+                return [
+                    { id: 'moss-mother', title: 'Moss Mother', category: 'main', content: 'First major boss poison patterns platform mobility' },
+                    { id: 'lace', title: 'Lace', category: 'main', content: 'Persistent rival adaptive AI parrying' },
+                    { id: 'steel-assassin-sharpe', title: 'Steel Assassin Sharpe', category: 'optional', content: 'Ultimate skill test lightning-fast attacks parrying' },
+                    { id: 'money-tips', title: 'Money Saving Tips', category: 'tips', content: 'Currency management rosary farming efficient purchases' },
+                    { id: 'beginner-guide', title: 'Beginner Guide', category: 'guide', content: 'Getting started combat mastery progression path' }
+                ];
+            }
+            
+            init() {
+                const searchInputs = document.querySelectorAll('#searchInput, #mobileSearchInput');
+                searchInputs.forEach(input => {
+                    input.addEventListener('input', (e) => this.handleSearch(e.target.value));
+                });
+            }
+            
+            handleSearch(query) {
+                if (query.length < 2) return;
+                
+                const results = this.searchData.filter(item => 
+                    item.title.toLowerCase().includes(query.toLowerCase()) ||
+                    item.content.toLowerCase().includes(query.toLowerCase())
+                );
+                
+                this.displayResults(results);
+            }
+            
+            displayResults(results) {
+                // Highlight matching content
+                const bossCards = document.querySelectorAll('.boss-card');
+                bossCards.forEach(card => {
+                    const bossName = card.querySelector('h4').textContent.toLowerCase();
+                    const isMatch = results.some(result => 
+                        bossName.includes(result.title.toLowerCase())
+                    );
+                    
+                    if (isMatch) {
+                        card.style.borderColor = '#007AFF';
+                        card.style.backgroundColor = '#F0F8FF';
+                    } else {
+                        card.style.borderColor = '';
+                        card.style.backgroundColor = '';
+                    }
+                });
+            }
+        }
+        
+        // Filter System
+        class FilterManager {
+            constructor() {
+                this.activeFilter = 'all';
+                this.init();
+            }
+            
+            init() {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.setFilter(e.target.dataset.filter));
+                });
+            }
+            
+            setFilter(filter) {
+                this.activeFilter = filter;
+                
+                // Update button states
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+                
+                // Filter content
+                this.filterContent();
+            }
+            
+            filterContent() {
+                const bossCards = document.querySelectorAll('.boss-card');
+                bossCards.forEach(card => {
+                    const category = card.dataset.category;
+                    const shouldShow = this.activeFilter === 'all' || category === this.activeFilter;
+                    
+                    card.style.display = shouldShow ? 'block' : 'none';
+                });
+            }
+        }
+        
+        // Favorite System
+        class FavoriteManager {
+            constructor() {
+                this.favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                this.init();
+            }
+            
+            init() {
+                const favoriteButtons = document.querySelectorAll('.favorite-btn');
+                favoriteButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.toggleFavorite(e.target.closest('.favorite-btn')));
+                    this.updateButtonState(btn);
+                });
+            }
+            
+            toggleFavorite(button) {
+                const bossId = button.dataset.boss;
+                const icon = button.querySelector('i');
+                
+                if (this.favorites.includes(bossId)) {
+                    this.favorites = this.favorites.filter(id => id !== bossId);
+                    icon.className = 'far fa-heart';
+                } else {
+                    this.favorites.push(bossId);
+                    icon.className = 'fas fa-heart text-apple-red';
+                }
+                
+                localStorage.setItem('favorites', JSON.stringify(this.favorites));
+            }
+            
+            updateButtonState(button) {
+                const bossId = button.dataset.boss;
+                const icon = button.querySelector('i');
+                
+                if (this.favorites.includes(bossId)) {
+                    icon.className = 'fas fa-heart text-apple-red';
+                } else {
+                    icon.className = 'far fa-heart';
+                }
+            }
+        }
+        
+        // Smooth Scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // Mobile Menu
+        class MobileMenu {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+                const mobileMenu = this.createMobileMenu();
+                
+                document.querySelector('header').appendChild(mobileMenu);
+                
+                mobileMenuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            createMobileMenu() {
+                const menu = document.createElement('div');
+                menu.className = 'md:hidden bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-dark-border hidden';
+                menu.innerHTML = `
                 <div class="px-4 py-2 space-y-2">
-                    <a href="#bosses" class="block py-2 text-gray-700 hover:text-apple-blue">Boss Strategies</a>
-                    <a href="#tips" class="block py-2 text-gray-700 hover:text-apple-blue">Money Tips</a>
-                    <a href="#beginner" class="block py-2 text-gray-700 hover:text-apple-blue">Beginner Guide</a>
-                    <a href="#maps" class="block py-2 text-gray-700 hover:text-apple-blue">Interactive Maps</a>
+                        <a href="#bosses" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-apple-blue">Boss Strategies</a>
+                        <a href="#tips" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-apple-blue">Money Tips</a>
+                        <a href="#beginner" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-apple-blue">Beginner Guide</a>
+                        <a href="#maps" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-apple-blue">Interactive Maps</a>
                 </div>
             `;
+                return menu;
+            }
+        }
+        
+        // Animation on Scroll
+        class ScrollAnimations {
+            constructor() {
+                this.init();
+            }
             
-            document.querySelector('header').appendChild(mobileMenu);
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
+            init() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                document.querySelectorAll('section').forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
+        
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
             });
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            new ThemeManager();
+            new SearchManager();
+            new FilterManager();
+            new FavoriteManager();
+            new MobileMenu();
+            new ScrollAnimations();
+            
+            // Add CSS for filter buttons
+            const style = document.createElement('style');
+            style.textContent = `
+                .filter-btn {
+                    padding: 8px 16px;
+                    border-radius: 8px;
+                    background: #f3f4f6;
+                    color: #374151;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .filter-btn:hover {
+                    background: #e5e7eb;
+                }
+                .filter-btn.active {
+                    background: #007AFF;
+                    color: white;
+                }
+                .dark .filter-btn {
+                    background: #374151;
+                    color: #d1d5db;
+                }
+                .dark .filter-btn:hover {
+                    background: #4b5563;
+                }
+                .dark .filter-btn.active {
+                    background: #007AFF;
+                    color: white;
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
