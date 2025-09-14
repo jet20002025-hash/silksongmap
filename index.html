@@ -184,22 +184,22 @@
                 <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
                     <div class="text-3xl font-bold text-apple-blue mb-2">43</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Total Bosses</div>
-                </div>
+                    </div>
                 <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
                     <div class="text-3xl font-bold text-apple-green mb-2">7</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Main Story</div>
-                </div>
+                    </div>
                 <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
                     <div class="text-3xl font-bold text-apple-orange mb-2">16</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Mini Bosses</div>
-                </div>
+                    </div>
                 <div class="bg-white dark:bg-dark-surface p-6 rounded-xl shadow-sm border border-gray-200 dark:border-dark-border hover:shadow-md transition-shadow duration-200">
                     <div class="text-3xl font-bold text-apple-red mb-2">20</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Optional</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -1022,12 +1022,26 @@
                 navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
                         console.log('SW registered: ', registration);
+                        // Update service worker if available
+                        if (registration.waiting) {
+                            registration.waiting.postMessage({ action: 'skipWaiting' });
+                        }
                     })
                     .catch(registrationError => {
                         console.log('SW registration failed: ', registrationError);
+                        // Fallback: continue without service worker
                     });
             });
         }
+        
+        // Error handling for missing resources
+        window.addEventListener('error', (e) => {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK') {
+                console.warn('Resource failed to load:', e.target.src || e.target.href);
+                // Don't show error to user for missing resources
+                e.preventDefault();
+            }
+        });
         
         // Interactive Map System
         class InteractiveMap {
