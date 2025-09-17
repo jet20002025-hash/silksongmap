@@ -25,9 +25,14 @@ REM Commit changes
 echo 💾 Committing changes...
 git commit -m "Add SilksongMap website with SEO optimization - Complete HTML website with boss strategies - Sitemap.xml for search engine optimization - Robots.txt for crawling instructions - Responsive design with Apple color scheme - Beginner guides and money-saving tips"
 
-REM Push to GitHub
-echo 🌐 Pushing to GitHub...
-git push -u origin main
+REM Check current branch and push to GitHub
+echo 🌐 Checking current branch...
+git branch --show-current > temp_branch.txt
+set /p CURRENT_BRANCH=<temp_branch.txt
+del temp_branch.txt
+
+echo 🌐 Pushing to GitHub (branch: %CURRENT_BRANCH%)...
+git push -u origin %CURRENT_BRANCH%
 
 echo.
 echo ✅ Deployment complete!

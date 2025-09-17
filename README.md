@@ -1,38 +1,71 @@
 # SilksongMap - Hollow Knight: Silksong Complete Guide
 
-A comprehensive guide website for Hollow Knight: Silksong featuring boss strategies, money-saving tips, and beginner guides.
+一个功能丰富的Hollow Knight: Silksong指南网站，包含Boss策略、省钱技巧、新手指南和交互式地图。
 
-## 🌐 Website Features
+## 🌟 新功能特性
 
-- **Complete Boss Strategies**: 43 boss guides with detailed tactics and rewards
-- **Money-Saving Tips**: Currency management and efficient farming locations  
-- **Beginner Guide**: Step-by-step progression path and combat mastery
-- **Interactive Maps**: World exploration and collectibles tracking
-- **SEO Optimized**: Proper meta tags, sitemap, and robots.txt
+### 🎨 视觉设计优化
+- **暗色主题支持** - 自动切换和手动切换选项
+- **动画效果** - 平滑的过渡动画和滚动动画
+- **响应式设计** - 完美适配移动端和桌面端
+- **现代化UI** - 基于Apple设计语言的现代界面
 
-## 📁 File Structure
+### 🔍 交互功能增强
+- **实时搜索** - 智能搜索Boss、技巧和指南
+- **内容筛选** - 按Boss类型筛选内容
+- **收藏系统** - 收藏喜欢的Boss策略
+- **进度追踪** - 本地存储用户偏好
+
+### 📱 移动端优化
+- **触摸友好** - 优化的移动端交互体验
+- **移动搜索** - 专门的移动端搜索栏
+- **响应式导航** - 自适应的移动端菜单
+- **PWA支持** - 可安装的渐进式Web应用
+
+### ⚡ 性能优化
+- **PWA功能** - 离线访问和后台同步
+- **资源预加载** - 关键资源预加载
+- **缓存策略** - 智能缓存管理
+- **懒加载** - 图片和内容懒加载
+
+## 🌐 网站功能
+
+- **完整Boss策略**: 43个Boss的详细战术和奖励
+- **省钱技巧**: 货币管理和高效刷钱位置  
+- **新手指南**: 分步骤的进度路径和战斗掌握
+- **交互式地图**: 世界探索和收集品追踪
+- **SEO优化**: 正确的meta标签、sitemap和robots.txt
+- **暗色主题**: 支持明暗主题切换
+- **搜索功能**: 实时搜索和内容筛选
+- **收藏系统**: 个人收藏和偏好设置
+
+## 📁 文件结构
 
 ```
 silksongmap/
-├── index.html          # Main website file
-├── sitemap.xml         # SEO sitemap for search engines
-├── robots.txt          # Search engine crawling instructions
-└── README.md           # This file
+├── index.html          # 主网站文件
+├── manifest.json       # PWA清单文件
+├── sw.js              # Service Worker文件
+├── sitemap.xml         # SEO站点地图
+├── robots.txt          # 搜索引擎爬虫指令
+├── deploy.bat          # Windows部署脚本
+├── deploy.sh           # Linux/Mac部署脚本
+└── README.md           # 说明文档
 ```
 
-## 🚀 Deployment Instructions
+## 🚀 部署说明
 
-### GitHub Pages Setup
+### GitHub Pages设置
 
-1. **Upload Files**: Upload all files to your GitHub repository
-2. **Enable Pages**: Go to repository Settings → Pages
-3. **Select Source**: Choose "Deploy from a branch" → main branch
-4. **Custom Domain**: Add `silksongmap.store` in Pages settings
-5. **DNS Configuration**: Point your domain to GitHub Pages
+1. **上传文件**: 将所有文件上传到GitHub仓库
+2. **启用Pages**: 进入仓库设置 → Pages
+3. **选择源**: 选择"从分支部署" → main分支
+4. **自定义域名**: 在Pages设置中添加域名
+5. **DNS配置**: 将域名指向GitHub Pages
 
-### DNS Configuration
+### DNS配置
 
-Add these DNS records to your domain provider:
+在域名提供商处添加以下DNS记录：
 
 ```
 Type: CNAME
@@ -47,66 +80,87 @@ Value: 185.199.110.153
 Value: 185.199.111.153
 ```
 
-## 🔧 SEO Features
+## 🔧 技术特性
 
-### Sitemap.xml
-- Includes all main sections and future pages
-- Proper priority and change frequency settings
-- XML format compliant with search engine standards
+### PWA功能
+- 离线访问支持
+- 可安装到设备
+- 后台同步
+- 推送通知（未来功能）
 
-### Robots.txt
-- Allows all search engines to crawl the site
-- Blocks unwanted bots and admin areas
-- Points to sitemap location
-- Includes crawl delay for server protection
+### SEO优化
+- 结构化数据（JSON-LD）
+- Open Graph标签
+- Twitter Card支持
+- 完整的meta标签
+- 站点地图和robots.txt
 
-### HTML SEO
-- Canonical URL: `https://silksongmap.store/`
-- Complete meta tags (description, keywords, Open Graph)
-- Structured data (JSON-LD)
-- Semantic HTML with proper heading hierarchy
+### 性能优化
+- Service Worker缓存
+- 资源预加载
+- 图片懒加载
+- 代码分割
 
-## 📱 Responsive Design
+### 用户体验
+- 暗色主题切换
+- 实时搜索
+- 内容筛选
+- 收藏系统
+- 平滑滚动
+- 移动端优化
 
-- **Mobile-First**: Optimized for mobile devices
-- **Apple Design**: Uses Apple's color scheme and modern aesthetics
-- **Tailwind CSS**: Responsive framework for consistent styling
-- **Touch-Friendly**: Mobile navigation and interactions
+## 📱 响应式设计
 
-## 🎯 Content Strategy
+- **移动优先**: 针对移动设备优化
+- **Apple设计**: 使用Apple色彩方案和现代美学
+- **Tailwind CSS**: 响应式框架确保一致的样式
+- **触摸友好**: 移动端导航和交互
 
-### Current Content
-- Boss strategies based on silksongmap.gg analysis
-- Money-saving tips and efficiency guides
-- Beginner-friendly progression paths
-- Interactive map resources
+## 🎯 内容策略
 
-### Future Expansion
-- Individual boss pages with detailed strategies
-- Community guides and user submissions
-- Video tutorials and walkthroughs
-- Achievement tracking and progress tools
+### 当前内容
+- 基于silksongmap.gg分析的Boss策略
+- 省钱技巧和效率指南
+- 新手友好的进度路径
+- 交互式地图资源
 
-## 🔄 Updates
+### 未来扩展
+- 单独的Boss页面和详细策略
+- 社区指南和用户提交
+- 视频教程和攻略
+- 成就追踪和进度工具
 
-To update the website:
+## 🔄 更新说明
 
-1. **Content Updates**: Edit `index.html` directly
-2. **Sitemap Updates**: Modify `sitemap.xml` when adding new pages
-3. **SEO Updates**: Update meta tags and structured data as needed
-4. **Deploy**: Changes are automatically deployed via GitHub Pages
+要更新网站：
 
-## 📊 Analytics Setup
+1. **内容更新**: 直接编辑`index.html`
+2. **站点地图更新**: 添加新页面时修改`sitemap.xml`
+3. **SEO更新**: 根据需要更新meta标签和结构化数据
+4. **部署**: 通过GitHub Pages自动部署更改
 
-Consider adding:
-- Google Analytics for traffic tracking
-- Google Search Console for SEO monitoring
-- Hotjar for user behavior analysis
+## 📊 分析设置
 
-## 🤝 Contributing
+建议添加：
+- Google Analytics用于流量追踪
+- Google Search Console用于SEO监控
+- Hotjar用于用户行为分析
 
-This is a fan site for Hollow Knight: Silksong. All content is created for educational purposes and is not affiliated with Team Cherry.
+## 🤝 贡献
 
-## 📄 License
+这是一个Hollow Knight: Silksong的粉丝网站。所有内容均用于教育目的，与Team Cherry无关。
 
-This project is for educational purposes. Hollow Knight: Silksong is owned by Team Cherry.
+## 📄 许可证
+
+本项目用于教育目的。Hollow Knight: Silksong归Team Cherry所有。
+
+## 🆕 更新日志
+
+### v1.0.0 (2024-12-19)
+- ✨ 添加暗色主题支持
+- 🔍 实现实时搜索功能
+- 📱 优化移动端体验
+- ⚡ 添加PWA支持
+- 🎨 改进视觉设计和动画
+- 🔧 添加内容筛选和收藏功能
+- 📈 增强SEO和性能优化
