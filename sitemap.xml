@@ -55,4 +55,28 @@
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
+    
+    <!-- Shakra Guide Section -->
+    <url>
+        <loc>https://silksongmap.store/#shakra</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Silk Skills Guide Section -->
+    <url>
+        <loc>https://silksongmap.store/#silk-skills</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- FAQ Section -->
+    <url>
+        <loc>https://silksongmap.store/#faq</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
